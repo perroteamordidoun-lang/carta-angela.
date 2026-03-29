@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Angela ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+    color: black;
+    animation: fondo 8s infinite alternate;
+}
+
+/* Fondo */
+@keyframes fondo {
+    0% { background: #ffb6c1; }
+    50% { background: #ff69b4; }
+    100% { background: #ffc0cb; }
+}
+
+/* Nombre flotando */
+.nombre {
+    position: absolute;
+    font-size: 60px;
+    opacity: 0.08;
+    animation: flotar 10s linear infinite;
+}
+
+@keyframes flotar {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-10vh); }
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    padding: 30px;
+}
+
+h1 {
+    font-size: 55px;
+}
+
+#texto {
+    font-size: 28px;
+    width: 85%;
+    margin: auto;
+    min-height: 150px;
+}
+
+/* CONTENEDOR DE BOTONES */
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Botones */
+button {
+    padding: 18px 30px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* SOLO BAJA EL BOTÓN CARTA */
+.bajar {
+    margin-top: 25px;
+}
+
+/* Popups */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: white;
+    padding: 25px;
+    width: 85%;
+    border-radius: 15px;
+    font-size: 24px;
+    z-index: 10;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.popup.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Sobre */
+.sobre-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+.sobre {
+    width: 300px;
+    height: 200px;
+    background: #fff;
+    position: relative;
+    border: 2px solid #ccc;
+}
+
+.tapa {
+    width: 100%;
+    height: 100%;
+    background: pink;
+    position: absolute;
+    top: 0;
+    transform-origin: top;
+    transition: 1s;
+}
+
+.carta {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    background: white;
+    padding: 15px;
+    font-size: 20px;
+    transition: 1s;
+}
+
+/* Corazones */
+.heart {
+    position: absolute;
+    color: red;
+    animation: caer linear;
+}
+
+@keyframes caer {
+    0% { transform: translateY(-10%); }
+    100% { transform: translateY(100vh); }
+}
+
+/* Brillos */
+.sparkle {
+    position: absolute;
+    font-size: 14px;
+    animation: brillo 2s infinite;
+}
+
+@keyframes brillo {
+    0% {opacity:0;}
+    50% {opacity:1;}
+    100% {opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<div class="container">
+    <h1>Para ANGELA ❤️</h1>
+
+    <div id="texto"></div>
+
+    <br>
+
+    <div class="botones">
+        <button onclick="abrirSobre()">💖 Presióname</button>
+
+        <!-- BOTÓN BAJADO -->
+        <button class="bajar" onclick="abrirCarta()">💌 Carta</button>
+
+        <button onclick="sorpresa()">👀 No presiones</button>
+    </div>
+</div>
+
+<!-- SOBRE -->
+<div class="sobre-container" id="sobreBox">
+    <div class="sobre">
+        <div class="tapa" id="tapa"></div>
+        <div class="carta" id="contenidoCarta">
+            Me merezco muchas fotos para siempre, ya que me encanta verla a usted: su sonrisa, su cabello,
+            sus lindos cachetes y hasta ese granito de unicornio que tiene jajaja.  
+            Aparte de sus chichis y el resto de su lindo cuerpo 😏
+        </div>
+    </div>
+</div>
+
+<!-- POPUPS -->
+<div id="p2" class="popup"></div>
+<div id="p3" class="popup"></div>
+
+<script>
+
+// Texto animado
+let texto = `Sé que no nos conocemos lo suficiente, pero en este muy corto tiempo que llevamos conversando me he apegado mucho a usted como no tiene idea. No piense que me le estoy proponiendo o algo así jajaja, solo quiero darle las gracias porque gracias a usted me liberé de una atadura que nunca pensé liberarme, porque según yo era feliz. Por eso, literalmente ya la quiero mucho. De corazón, Jonathan ❤️`;
+
+let i = 0;
+function escribir() {
+    if (i < texto.length) {
+        document.getElementById("texto").innerHTML += texto.charAt(i);
+        i++;
+        setTimeout(escribir, 35);
+    }
+}
+escribir();
+
+// Sobre
+function abrirSobre() {
+    document.getElementById("sobreBox").style.display = "block";
+    setTimeout(() => {
+        document.getElementById("tapa").style.transform = "rotateX(180deg)";
+        document.getElementById("contenidoCarta").style.top = "0";
+    }, 200);
+}
+
+// Carta
+function abrirCarta() {
+    let p = document.getElementById("p2");
+    p.innerHTML = "P.D.: Por amor a Dios, deje de decir que es fea, porque para mí es muy hermosa ❤️<br><br>Así que deje de taparse la cara cuando me mande una foto hermosa donde se la ve... o bueno, mejor no se tape nada jajaja 😏";
+    p.style.display = "block";
+    setTimeout(()=>p.classList.add("show"),10);
+}
+
+// Sorpresa
+function sorpresa() {
+    let p = document.getElementById("p3");
+    p.innerHTML = "Ya olvídese del parce y solo déjeme a mí jajaja 💖<br><br>TQM ❤️";
+    p.style.display = "block";
+    setTimeout(()=>p.classList.add("show"),10);
+}
+
+// Cerrar popup
+window.onclick = function(e) {
+    document.querySelectorAll(".popup").forEach(p=>{
+        if(e.target === p){
+            p.classList.remove("show");
+            setTimeout(()=>p.style.display="none",300);
+        }
+    });
+}
+
+// Corazones
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+}, 300);
+
+// Brillos
+setInterval(() => {
+    let s = document.createElement("div");
+    s.className = "sparkle";
+    s.innerHTML = "✨";
+    s.style.left = Math.random() * 100 + "vw";
+    s.style.top = Math.random() * 100 + "vh";
+    document.body.appendChild(s);
+
+    setTimeout(() => s.remove(), 2000);
+}, 500);
+
+// ANGELA flotando
+setInterval(() => {
+    let n = document.createElement("div");
+    n.className = "nombre";
+    n.innerHTML = "ANGELA";
+    n.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(n);
+
+    setTimeout(() => n.remove(), 10000);
+}, 2000);
+
+</script>
+
+</body>
+</html>
